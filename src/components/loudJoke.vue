@@ -34,6 +34,6 @@ export default {
 <style scoped>
 button{
     padding: 5px;
-    font-weight: bold;
+    font-size: 1.5rem;
 }
 </style>

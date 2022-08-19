@@ -67,6 +67,6 @@ export default {
   gap: 20px;
 }
 p{
-  color:royalblue
+  color:orangered;
 }
 </style>

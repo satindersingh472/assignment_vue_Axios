@@ -33,4 +33,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+button{
+    padding: 5px;
+    font-size: 1.5rem;
+}
+</style>

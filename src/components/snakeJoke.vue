@@ -39,7 +39,7 @@ p{
 }
 button{
   padding: 5px;
-  font-weight: bold;
   text-transform: uppercase;
+  font-size: 1.5rem;
 }
 </style>
