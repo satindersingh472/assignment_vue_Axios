@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    <!-- joke button to display and make an api call -->
     <joke-button></joke-button>
+    <!-- paragraph div to display joke on string and if no joke is present then msg is displayed for instructions -->
     <div class="paragraph">
       <div v-if="joke !== undefined">
       <p>{{joke}}</p>
@@ -9,8 +11,11 @@
       <p>click the button to see random joke<br>and below buttons are to modify the text<br>always click joke button to get a new joke</p>
     </div>
     </div>
+    <!-- normal joke component will set the joke to normal -->
     <normal-joke></normal-joke>
+    <!-- snake joke will put underscore after every word -->
     <snake-joke></snake-joke>
+    <!-- loud joke component will make all the letters in a string uppercase -->
     <loud-joke></loud-joke>
   </div>
 </template>
@@ -29,9 +34,12 @@ export default {
     LoudJoke
   },
   methods: {
+    // joke recieved method will display a joke when api is called by pressing joke button
     joke_recieved(random_joke) {
       this.joke = random_joke;
     },
+    // show changed method will get called by global event happening when event lifecycle is on mounted
+    // it will store any changes to joke and that joke will get displayed in the html
     show_changed(random_joke){
       if(this.joke !== undefined){
         this.joke = random_joke;
@@ -39,7 +47,9 @@ export default {
     },
   },
   mounted () {
+    // joke sent is a global event coming from jokebutton
     this.$root.$on(`joke_sent`,this.joke_recieved);
+    // changed joke global event is bringing the change emited by other components and calling then show changed method
     this.$root.$on(`changed_joke`,this.show_changed);
   },
   data() {
