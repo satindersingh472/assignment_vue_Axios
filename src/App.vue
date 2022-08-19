@@ -1,28 +1,62 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <joke-button></joke-button>
+    <div class="paragraph">
+      <div v-if="joke !== undefined">
+      <p>{{joke}}</p>
+      </div>
+    <div v-else-if ="joke === undefined">
+      <p>click the button to see random joke<br>and below buttons are to modify the text<br>always click joke button to get a new joke</p>
+    </div>
+    </div>
+    <normal-joke></normal-joke>
+    <snake-joke></snake-joke>
+    <loud-joke></loud-joke>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import JokeButton from '@/components/jokeButton.vue';
+import SnakeJoke from "@/components/snakeJoke.vue";
+import NormalJoke from '@/components/normalJoke.vue';
+import LoudJoke from '@/components/loudJoke.vue';
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    JokeButton,
+    SnakeJoke,
+    NormalJoke,
+    LoudJoke
+  },
+  methods: {
+    joke_recieved(random_joke) {
+      this.joke = random_joke;
+    },
+    show_changed(random_joke){
+      if(this.joke !== undefined){
+        this.joke = random_joke;
+      }
+    },
+  },
+  mounted () {
+    this.$root.$on(`joke_sent`,this.joke_recieved);
+    this.$root.$on(`changed_joke`,this.show_changed);
+  },
+  data() {
+    return {
+      joke: undefined,
+    }
+  },
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+<style scoped> 
+#app{
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  display: grid;
+  gap: 20px;
+}
+p{
+  color:royalblue
 }
 </style>
